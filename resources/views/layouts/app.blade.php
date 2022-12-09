@@ -38,10 +38,7 @@
         type="text/css"
     />
     <!-- Core theme CSS (includes Bootstrap)-->
-    <link
-        href="css/styles.css"
-        rel="stylesheet"
-    />
+    <link href="{{asset('css/styles.css')}}" rel="stylesheet" />
 </head>
 
 <body>
@@ -82,12 +79,32 @@
                         >About</a></li>
                     <li class="nav-item"><a
                             class="nav-link px-lg-3 py-3 py-lg-4"
-                            href="post.html"
+                            href="/posts"
                         >Posts</a></li>
                     <li class="nav-item"><a
                             class="nav-link px-lg-3 py-3 py-lg-4"
                             href="/contact"
                         >Contact</a></li>
+                        @auth
+                        <li class="nav-item">
+                            <form action="{{route('logout')}}" method="POST">
+                                @csrf
+                                <button type="submit" class="nav-link px-lg-3 py-3 py-lg-4">Logout</button>
+
+                            </form>
+                        </li>
+                        @else
+                        <li class="nav-item"><a
+                            class="nav-link px-lg-3 py-3 py-lg-4"
+                            href={{route('login')}}
+                        >Login</a></li>
+
+                        <li class="nav-item"><a
+                            class="nav-link px-lg-3 py-3 py-lg-4"
+                            href={{route('register')}}
+                        >register</a></li>
+
+                    @endauth
                 </ul>
             </div>
         </div>
@@ -135,7 +152,7 @@
     <!-- Bootstrap core JS-->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
     <!-- Core theme JS-->
-    <script src="js/scripts.js"></script>
+    <script src="{{asset('js/scripts.js')}}"></script>
 </body>
 
 </html>
