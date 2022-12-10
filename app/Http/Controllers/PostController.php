@@ -15,10 +15,17 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = Post::all();
+        $posts =auth()->user()->posts()->paginate(1);
         return view('posts.index', [
             'posts' => $posts,
         ]);
+        // $posts = Post::all();
+        // return view('posts.index', [
+
+        // ]
+        // return view('posts.index', [
+        //     'posts' => $posts,
+        // ]);
     }
 
     /**
@@ -39,13 +46,24 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        $post = new Post();
-        $post->slug = Str::slug($request->input('title'));
-        $post->title = $request->input('title');
-        $post->body = $request->input('body');
-        $post->image = 'dflkdlf.png';
+        $data = $request->only('title', 'body');
+        $slug = str::slug($request->input('title'));
 
-        $post->save();
+        Post::create(
+            array_merge($data, [
+                'slug' => $slug,
+                'user_id' => auth()->user()->id,
+                'image' => 'default.png'
+            ])
+        );
+
+        // $post = new Post();
+        // $post->slug = Str::slug($request->input('title'));
+        // $post->title = $request->input('title');
+        // $post->body = $request->input('body');
+        // $post->image = 'dflkdlf.png';
+
+        // $post->save();
         return redirect()->route('posts.index');
     }
 
