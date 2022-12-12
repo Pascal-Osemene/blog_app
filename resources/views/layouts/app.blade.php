@@ -15,7 +15,7 @@
         name="author"
         content=""
     />
-    <title>Clean Blog - Start Bootstrap Theme</title>
+    <title>Pasky2great</title>
     <link
         rel="icon"
         type="image/x-icon"

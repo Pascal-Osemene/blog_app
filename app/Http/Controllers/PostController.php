@@ -119,7 +119,7 @@ class PostController extends Controller
 
         $post = Post::findOrFail($id);
 
-        $data = request->only('title', 'body');
+        $data = $request->only('title', 'body');
         if($request->hasFile('image')) {
             $data = array_merge($data, [
                 'image'	=> $request->file('image')->store('blog_images', 'public')
@@ -128,7 +128,8 @@ class PostController extends Controller
                 unlink($file);
             }
         }
-        $post->update($request->only('title', 'body'));
+        $post->update($data);
+        session()->flash('success', 'Post updated successfully');
 
         return redirect()->route('posts.index');
         // $post->title = $request->input('title');
