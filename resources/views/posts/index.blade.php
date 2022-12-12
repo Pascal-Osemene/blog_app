@@ -26,6 +26,8 @@
             <div class="card shadow">
                 <div class="card-body">
 
+                 <x-alerts />
+
                     <div class="text-end">
                         <a href="{{route('posts.create')}}" class="btn btn-primary btn-sm py-3">
                             <i class="fa fa-plus"></i>
@@ -48,7 +50,10 @@
                         <tbody>
                             @forelse ($posts as $post)
                                 <tr>
-                                    <td>{{$post->image}}</td>
+                                    <td>
+                                        <img src="{{asset('storage/'.$post->image)}}" alt="" width="50" height="auto">
+
+                                    </td>
                                     <td>{{$post->title}}</td>
                                     <td>{{$post->slug}}</td>
                                     <td>{{$post->body}}</td>
