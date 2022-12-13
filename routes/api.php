@@ -1,8 +1,10 @@
 <?php
 
-use App\Http\Controllers\Api\PostController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Api\PostController;
+use App\Http\Controllers\Api\RegisterController;
+use App\Http\Controllers\Api\LoginController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,5 +26,5 @@ use Illuminate\Support\Facades\Route;
 Route::apiResource('posts', PostController::class)->except('show');
 Route::get('posts/{slug}', [PostController::class, 'show'])->name('posts.show');
 
-Route::post('register', PostController::class)->name('api.register');
-Route::post('login', PostController::class)->name('api.login');
+Route::post('register', RegisterController::class)->name('api.register');
+Route::post('login', loginController::class)->name('api.login');
